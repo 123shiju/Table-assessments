@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <style>
+      .input {
+        width: 100px;
+        border-style: none;
+        outline: none;
+      }
+      table {
+        border-collapse: collapse;
+        align-self: center;
+        width: 100%;
+        height: 400px;
+      }
+      th,
+      td {
+        border: 1px solid;
+        padding: 8px;
+        text-align: left;
+      }
+      .table-container {
+        display: flex;
+        justify-content: left;
+        margin-left: 10px;
+      }
+      button {
+        width: 50px;
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const root = document.getElementById("root");
+
+      var Data = [
+        { month1: "onboarding Call" },
+        { month1: "Google Search Console Access" },
+        { month1: "Google Search Console Access" },
+        { month1: "Website Access" },
+        { month1: "Technical Audit" },
+        { month1: "Anchor Text And Semantic Analysis" },
+        { month1: "Competitor Analysis" },
+        { month1: "Anchor Text/URL Mapping" },
+        { month1: "Google Data Studio Report + Local Reporting Suite" },
+        { month1: "Site level Optimisation" },
+        { month1: "On Page Optimisation" },
+        { month1: "Content Creation" },
+        { month1: "Content Publishing" },
+        { month1: "premium press Release" },
+        { month1: "Authority Niche Placements" },
+        { month1: "Review management" },
+        { month1: "Index Links" },
+        { month1: "Vedio Recap" },
+      ];
+
+      function App() {
+        const [inputs,setInputs] = React.useState(() => {
+          let intialInputs = [];
+          for (let i = 0; i < 8; i++) {
+            intialInputs.push(
+              <td key={i}>
+                <input
+                  type="text"
+                  className="input"
+                  onChange={(e) => handleChange(index, e.target.value)}
+                />
+              </td>
+            );
+          }
+          return intialInputs;
+        });
+
+        const handleChange = (index, value) => {
+          const newInputValues = [...inputs];
+          newInputValues[index] = value;
+          setInputs(newInputValues);
+        };
+        const handlesave = () => {
+         
+          console.log(inputs);
+        };
+        return (
+          <div className="table-container">
+            <table style={{ border: "2px solid" }}>
+              <thead>
+                <tr>
+                  <h3>Month 1</h3>
+                  {Data.map((key, index) => {
+                    return (
+                      <tr key={index}>
+                        <th>{key.month1}</th>
+                        {inputs}
+                      </tr>
+                    );
+                  })}
+                </tr>
+              </thead>
+            </table>
+            <button onClick={handlesave}>save</button>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
